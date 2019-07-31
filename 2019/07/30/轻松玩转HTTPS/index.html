@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="系统,shell,">
 
 
 
@@ -81,21 +81,22 @@
 
 
 
-<meta name="description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件   需要一个命令行服务器">
+<meta name="description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot 不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件    需要一个命">
+<meta name="keywords" content="系统,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="轻松玩转HTTPS">
 <meta property="og:url" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/index.html">
 <meta property="og:site_name" content="luobodazahui">
-<meta property="og:description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件   需要一个命令行服务器">
+<meta property="og:description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot 不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件    需要一个命">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/4.jpg">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/1.png">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/2.png">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/3.jpg">
-<meta property="og:updated_time" content="2019-07-30T01:42:30.327Z">
+<meta property="og:updated_time" content="2019-07-30T02:46:42.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="轻松玩转HTTPS">
-<meta name="twitter:description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件   需要一个命令行服务器">
+<meta name="twitter:description" content="今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！ Certbot 不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。 我们先打开其官网，整体浏览下  https://certbot.eff.org/lets-encrypt/centos6-nginx  我们可以看到，想使用 Certbot，需要一些条件    需要一个命">
 <meta name="twitter:image" content="https://blog.luobodazahui.top/2019/07/30/轻松玩转HTTPS/4.jpg">
 
 
@@ -320,6 +321,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统/" itemprop="url" rel="index">
+                    <span itemprop="name">系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -356,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  654
+                  659
                 </span>
               
 
@@ -393,47 +416,59 @@
       
 
       
-        
+        <p>
 
-
-<img src="/2019/07/30/轻松玩转HTTPS/4.jpg">
+</p>
+<p><img src="/2019/07/30/轻松玩转HTTPS/4.jpg"></p>
 <p>今天分享一个非常给力的 SSL 证书生成网站，从此 HTTPS 不再是难事儿！</p>
-<h1 id="Certbot"><a href="#Certbot" class="headerlink" title="Certbot"></a>Certbot</h1><p>不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。</p>
+<h1>Certbot</h1>
+<p>不错，今天的主角就是给力的 Certbot，免费好用，真是我等 diaosi 的一大福音。</p>
 <p>我们先打开其官网，整体浏览下</p>
 <blockquote>
-<p><a href="https://certbot.eff.org/lets-encrypt/centos6-nginx" target="_blank" rel="noopener">https://certbot.eff.org/lets-encrypt/centos6-nginx</a></p>
+<p>https://certbot.eff.org/lets-encrypt/centos6-nginx</p>
 </blockquote>
 <p>我们可以看到，想使用 Certbot，需要一些条件</p>
-<img src="/2019/07/30/轻松玩转HTTPS/1.png">
+<p><img src="/2019/07/30/轻松玩转HTTPS/1.png"></p>
 <ol>
-<li><p>需要一个命令行服务器，一般就是 linux了。我这里使用的是 CentOS6</p>
+<li>
+<p>需要一个命令行服务器，一般就是 linux了。我这里使用的是 CentOS6</p>
 </li>
-<li><p>我们需要已经部署了一个 http 服务，80 端口是监听状态的，我使用的是 Nginx 代理。</p>
+<li>
+<p>我们需要已经部署了一个 http 服务，80 端口是监听状态的，我使用的是 Nginx 代理。</p>
 </li>
-<li><p>有执行 root 权限的用户。</p>
-<a id="more"></a>
+<li>
+<p>有执行 root 权限的用户。</p>
+<p>&lt;!-- more --&gt;</p>
 </li>
 </ol>
-<h1 id="具体安装"><a href="#具体安装" class="headerlink" title="具体安装"></a>具体安装</h1><p>在使用官网上的安装步骤前，我们要先有 Nginx，并且已经成功启动，当然也要有绑定了公网 IP 的域名，因为 SSL 证书都是要绑定到具体域名的。<br>公网 IP，域名申请，Nginx 安装等，就不说啦，我们现在来看一下我这里 Nginx 的简单配置。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       443;</span><br><span class="line">    server_name  www.kungfuworld.top;</span><br><span class="line">    ssl on;</span><br><span class="line">    root        /home/KungFuWorld/      ;</span><br><span class="line">    access_log  /home/log/access.log;</span><br><span class="line">    error_log   /home/log/error.log;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass       http://127.0.0.1:5000;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name kungfuworld.top;</span><br><span class="line">    rewrite ^(.*)$ https://$host$1 permanent;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>我配置的域名是 <a href="http://www.kungfuworld.top，后面在执行" target="_blank" rel="noopener">www.kungfuworld.top，后面在执行</a> Certbot 安装时，会自动扫描到这里配置的域名，从而根据这个域名来生成证书。<br>下面，就是一步步的安装官网的步骤来操作就好了</p>
-<h2 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">sudo mv certbot-auto /usr/local/bin/certbot-auto</span><br><span class="line">sudo chown root /usr/local/bin/certbot-auto</span><br><span class="line">sudo chmod 0755 /usr/local/bin/certbot-auto</span><br></pre></td></tr></table></figure>
-<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/local/bin/certbot-auto certonly --nginx</span><br></pre></td></tr></table></figure>
+<h1>具体安装</h1>
+<p>在使用官网上的安装步骤前，我们要先有 Nginx，并且已经成功启动，当然也要有绑定了公网 IP 的域名，因为 SSL 证书都是要绑定到具体域名的。
+公网 IP，域名申请，Nginx 安装等，就不说啦，我们现在来看一下我这里 Nginx 的简单配置。</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       443;</span><br><span class="line">    server_name  www.kungfuworld.top;</span><br><span class="line">    ssl on;</span><br><span class="line">    root        /home/KungFuWorld/      ;</span><br><span class="line">    access_log  /home/log/access.log;</span><br><span class="line">    error_log   /home/log/error.log;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass       http://127.0.0.1:5000;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name kungfuworld.top;</span><br><span class="line">    rewrite ^(.*)$ https://$host$1 permanent;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我配置的域名是 www.kungfuworld.top，后面在执行 Certbot 安装时，会自动扫描到这里配置的域名，从而根据这个域名来生成证书。
+下面，就是一步步的安装官网的步骤来操作就好了</p>
+<h2>安装 Certbot</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://dl.eff.org/certbot-auto</span><br><span class="line">sudo mv certbot-auto /usr/local/bin/certbot-auto</span><br><span class="line">sudo chown root /usr/local/bin/certbot-auto</span><br><span class="line">sudo chmod 0755 /usr/local/bin/certbot-auto</span><br></pre></td></tr></table></figure></p>
+<h2>生成证书</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/local/bin/certbot-auto certonly --nginx</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>中间会有一些需要用户交互的步骤，按照提示操作就好</p>
 </blockquote>
-<h2 id="配置-Nginx"><a href="#配置-Nginx" class="headerlink" title="配置 Nginx"></a>配置 Nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /etc/letsencrypt/live/kungfuworld.top/fullchain.pem;</span><br><span class="line">ssl_certificate_key /etc/letsencrypt/live/kungfuworld.top/privkey.pem;</span><br></pre></td></tr></table></figure>
+<h2>配置 Nginx</h2>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /etc/letsencrypt/live/kungfuworld.top/fullchain.pem;</span><br><span class="line">ssl_certificate_key /etc/letsencrypt/live/kungfuworld.top/privkey.pem;</span><br></pre></td></tr></table></figure></p>
 <p>在刚刚的 Nginx 配置文件中，增加上面的两条配置，就完成了证书的配置。</p>
 <p>如果不出意外，该域名的 HTTPS 就可以访问了，而且是浏览器信任的证书。</p>
-<img src="/2019/07/30/轻松玩转HTTPS/2.png">
-<h2 id="自动更新"><a href="#自动更新" class="headerlink" title="自动更新"></a>自动更新</h2><p>使用 Certbot 安装的证书，只有 90 天的有效期，还好其提供了方便的自动更新功能</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/certbot-auto renew</span><br></pre></td></tr></table></figure>
-<p>我们可以创建一个 crontab 任务，来自动更新<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 */80 * * /usr/local/bin/certbot-auto renew &amp;&gt;&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/07/30/轻松玩转HTTPS/2.png"></p>
+<h2>自动更新</h2>
+<p>使用 Certbot 安装的证书，只有 90 天的有效期，还好其提供了方便的自动更新功能</p>
+<p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/certbot-auto renew</span><br></pre></td></tr></table></figure></p>
+<p>我们可以创建一个 crontab 任务，来自动更新
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 */80 * * /usr/local/bin/certbot-auto renew &amp;&gt;&gt; /dev/null</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>每隔 80 天在凌晨 4 点执行一次 renew 操作</p>
 </blockquote>
 <p>至此，基于 Certbot 的 HTTPS 配置就完成了，可以开心的使用 HTTPS 喽。</p>
-<img src="/2019/07/30/轻松玩转HTTPS/3.jpg">
+<p><img src="/2019/07/30/轻松玩转HTTPS/3.jpg"></p>
 
       
     </div>
@@ -478,6 +513,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/系统/" rel="tag"># 系统</a>
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
 
       
       
@@ -496,6 +539,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/基于矩阵分解算法的推荐系统实战/" rel="prev" title="基于矩阵分解算法的推荐系统实战">
+                基于矩阵分解算法的推荐系统实战 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -577,7 +624,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,7 +635,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -599,7 +646,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -649,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Certbot"><span class="nav-number">1.</span> <span class="nav-text">Certbot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体安装"><span class="nav-number">2.</span> <span class="nav-text">具体安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Certbot"><span class="nav-number">2.1.</span> <span class="nav-text">安装 Certbot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成证书"><span class="nav-number">2.2.</span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Nginx"><span class="nav-number">2.3.</span> <span class="nav-text">配置 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动更新"><span class="nav-number">2.4.</span> <span class="nav-text">自动更新</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Certbot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">具体安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">安装 Certbot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">配置 Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">自动更新</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -683,7 +730,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.8k</span>
+    <span title="Site words total count">3.9k</span>
   
 </div>
 
@@ -917,6 +964,8 @@
   
 
   
+  
+
 
   
 
