@@ -81,22 +81,21 @@
 
 
 
-<meta name="description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心： &amp;">
+<meta name="description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心：">
 <meta name="keywords" content="Python,机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于矩阵分解算法的推荐系统实战">
 <meta property="og:url" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/index.html">
 <meta property="og:site_name" content="luobodazahui">
-<meta property="og:description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心： &amp;">
+<meta property="og:description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/jiqixuexi.jpg">
-<meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/table.png">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/1.png">
 <meta property="og:image" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/2.png">
-<meta property="og:updated_time" content="2019-07-31T09:51:49.126Z">
+<meta property="og:updated_time" content="2019-07-31T10:40:53.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于矩阵分解算法的推荐系统实战">
-<meta name="twitter:description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心： &amp;">
+<meta name="twitter:description" content="基于矩阵分解算法的图书推荐系统实战 推荐系统 推荐系统，可以根据用户的喜好来推荐给用户不同的事物。 推荐系统类型：  纯手工设置推荐内容 根据物品的销量，曝光率等来排序物品，并推荐给用户 根据不同的算法，整合不同维度的数据，来智能的推荐物品  简单的推荐系统模型 设： U 为所有用户集合 P 为所有物品集合 R 为用户对物品的喜好程度 模型 Model(R) = U * P 算法核心：">
 <meta name="twitter:image" content="https://blog.luobodazahui.top/2019/07/30/基于矩阵分解算法的推荐系统实战/jiqixuexi.jpg">
 
 
@@ -436,13 +435,12 @@ P 为所有物品集合
 R 为用户对物品的喜好程度
 模型 Model(R) = U * P
 算法核心：</p>
-<p>&lt;!-- more --&gt;</p>
+<p><a id="more"></a></p>
 <p>通过用户对不同物品的打分，来预测用户对其他物品的喜好程度。此处并没有考虑用户和物品的属性，如：用户年龄，性别，学历，工作等，物品价格，品类，外观等。</p>
 <p>通过用户对物品的打分，可以建立一个推荐值矩阵，之后就可以通过运算该矩阵来预测用户喜好，即为矩阵分解算法！
 矩阵分解：
 将推荐值矩阵 R 分解为矩阵 U 和 矩阵 P，使得 U 和 P 的乘积得到的新矩阵 R* 中的元素与 R 中的已知元素的值非常接近，那么 R* 中对应于 R 中的未知元素的值就是预测值。</p>
 <p>推荐值矩阵：</p>
-<p><img src="/2019/07/30/基于矩阵分解算法的推荐系统实战/table.png"></p>
 <table>
 <thead>
 <tr>
@@ -510,24 +508,24 @@ R 为用户对物品的喜好程度
 <p>矩阵分解实例：
 $$
 \begin{pmatrix}
-1 &amp; 3 &amp; 5 &amp; 4 \
-&amp; 2  &amp;  &amp; 4 \<br>
-3 &amp; 4 &amp; 3 &amp; &amp;  \
+1 &amp; 3 &amp; 5 &amp; 4 \\
+&amp; 2  &amp;  &amp; 4 \\<br>
+3 &amp; 4 &amp; 3 &amp; &amp;  \\
 \end{pmatrix}<br>
 \approx
 \begin{pmatrix}
--0.77 &amp; -1.84 \
--0.2 &amp; -1.85 \<br>
--1.98 &amp; -0.54 \
+-0.77 &amp; -1.84 \\
+-0.2 &amp; -1.85 \\<br>
+-1.98 &amp; -0.54 \\
 \end{pmatrix}
 \begin{pmatrix}
--1.46 &amp; -1.67 &amp; -0.88 &amp; -0.32 \
-0.04 &amp; -0.89 &amp; -2.3 &amp; -2.04 &amp;  \
-\end{pmatrix}  =
+-1.46 &amp; -1.67 &amp; -0.88 &amp; -0.32 \\
+0.04 &amp; -0.89 &amp; -2.3 &amp; -2.04 &amp;  \\
+\end{pmatrix}  \\=
 \begin{pmatrix}
-1.06 &amp; 2.93 &amp; 4.9 &amp; 4 \
-0.21 &amp; 1.97 &amp; 4.41 &amp; 3.84 \<br>
-2.88 &amp; 3.79 &amp; 2.98 &amp; 1.73 &amp;  \
+1.06 &amp; 2.93 &amp; 4.9 &amp; 4 \\
+0.21 &amp; 1.97 &amp; 4.41 &amp; 3.84 \\<br>
+2.88 &amp; 3.79 &amp; 2.98 &amp; 1.73 &amp;  \\
 \end{pmatrix}
 $$
 即：
