@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.luobodazahui.top/"/>
-  <updated>2019-07-31T10:40:53.262Z</updated>
+  <updated>2019-08-01T11:15:00.083Z</updated>
   <id>https://blog.luobodazahui.top/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微博内容及评论自动爬取</title>
+    <link href="https://blog.luobodazahui.top/2019/08/01/%E5%BE%AE%E5%8D%9A%E5%86%85%E5%AE%B9%E5%8F%8A%E8%AF%84%E8%AE%BA%E8%87%AA%E5%8A%A8%E7%88%AC%E5%8F%96/"/>
+    <id>https://blog.luobodazahui.top/2019/08/01/微博内容及评论自动爬取/</id>
+    <published>2019-08-01T11:13:25.000Z</published>
+    <updated>2019-08-01T11:15:00.083Z</updated>
+    
+    <content type="html"><![CDATA[<p></p><p><img src="/2019/08/01/微博内容及评论自动爬取/7.gif"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;
+
+&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/08/01/微博内容及评论自动爬取/7.gif&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="https://blog.luobodazahui.top/categories/Python/"/>
+    
+    
+      <category term="爬虫" scheme="https://blog.luobodazahui.top/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>基于矩阵分解算法的推荐系统实战</title>
