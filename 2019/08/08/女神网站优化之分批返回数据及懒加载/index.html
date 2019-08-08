@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flask,JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="luobodazahui" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="作为一个手残的外行前端 coder，今天因为需要，研究了下瀑布延时加载和图片的懒加载，做个总结，免得以后忘记了！ 瀑布流 最近做了一个图片网站，采用的是瀑布流的布局效果，大致如下：  看起来效果还不错，但是问题却来了，首页这里，每次 loading 都会一次性加载200+图片，我的天啊。如果赶上网速不好的时候，会导致其他网页也无法打开。这个真实没法忍，于是我准备优化一下。 下拉加载 很容易">
+<meta name="keywords" content="Flask,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="女神网站优化之分批返回数据及懒加载">
+<meta property="og:url" content="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/index.html">
+<meta property="og:site_name" content="luobodazahui">
+<meta property="og:description" content="作为一个手残的外行前端 coder，今天因为需要，研究了下瀑布延时加载和图片的懒加载，做个总结，免得以后忘记了！ 瀑布流 最近做了一个图片网站，采用的是瀑布流的布局效果，大致如下：  看起来效果还不错，但是问题却来了，首页这里，每次 loading 都会一次性加载200+图片，我的天啊。如果赶上网速不好的时候，会导致其他网页也无法打开。这个真实没法忍，于是我准备优化一下。 下拉加载 很容易">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/fengmian.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/nvshen1.gif">
+<meta property="og:updated_time" content="2019-08-08T12:21:32.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="女神网站优化之分批返回数据及懒加载">
+<meta name="twitter:description" content="作为一个手残的外行前端 coder，今天因为需要，研究了下瀑布延时加载和图片的懒加载，做个总结，免得以后忘记了！ 瀑布流 最近做了一个图片网站，采用的是瀑布流的布局效果，大致如下：  看起来效果还不错，但是问题却来了，首页这里，每次 loading 都会一次性加载200+图片，我的天啊。如果赶上网速不好的时候，会导致其他网页也无法打开。这个真实没法忍，于是我准备优化一下。 下拉加载 很容易">
+<meta name="twitter:image" content="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/fengmian.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/">
+
+
+
+
+
+  <title>女神网站优化之分批返回数据及懒加载 | luobodazahui</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2a4828ea69a362e8db242fda0876c28f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+	<a href="https://github.com/zhouwei713" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">luobodazahui</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">周萝卜的分享</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.luobodazahui.top/2019/08/08/女神网站优化之分批返回数据及懒加载/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luobo Zhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/luobo4.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luobodazahui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">女神网站优化之分批返回数据及懒加载</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-08T20:16:08+08:00">
+                2019-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/08/女神网站优化之分批返回数据及懒加载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/08/女神网站优化之分批返回数据及懒加载/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>
+
+</p>
+<p><img src="/2019/08/08/女神网站优化之分批返回数据及懒加载/fengmian.png"></p>
+<p>作为一个手残的外行前端 coder，今天因为需要，研究了下瀑布延时加载和图片的懒加载，做个总结，免得以后忘记了！</p>
+<h1>瀑布流</h1>
+<p>最近做了一个图片网站，采用的是瀑布流的布局效果，大致如下：</p>
+<p><img src="/2019/08/08/女神网站优化之分批返回数据及懒加载/nvshen1.gif"></p>
+<p>看起来效果还不错，但是问题却来了，首页这里，每次 loading 都会一次性加载200+图片，我的天啊。如果赶上网速不好的时候，会导致其他网页也无法打开。这个真实没法忍，于是我准备优化一下。</p>
+<h1>下拉加载</h1>
+<p>很容易，我自然而然的就想到了采用下拉的形式，每次加载一部分数据，那么说干就干。</p>
+<p><a id="more"></a></p>
+<h2>改造后台</h2>
+<p>最开始，我的后台代码是一次性把所有数据都返回给前端，现在把数据分成4分，首次进入首页时，只返回第一份
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    db = get_db()</span><br><span class="line">    cur = db.execute(<span class="string">'select name, nvshen_id from nvshen order by id desc'</span>)</span><br><span class="line">    nvshen = [dict(name=row[<span class="number">0</span>], nvshen_id=row[<span class="number">1</span>]) <span class="keyword">for</span> row <span class="keyword">in</span> cur.fetchall()]</span><br><span class="line">    seg = int(len(nvshen)/<span class="number">4</span>)</span><br><span class="line">    data = []</span><br><span class="line">    socre = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> nvshen[:seg]:</span><br><span class="line">        tmp_data = []</span><br><span class="line">        pic = db.execute(<span class="string">'select pic_url from picture where nvshen_id = (?)'</span>, [n[<span class="string">'nvshen_id'</span>]])</span><br><span class="line">        pic_list = [row[<span class="number">0</span>] <span class="keyword">for</span> row <span class="keyword">in</span> pic.fetchall()]</span><br><span class="line">        pic_url = random.choice(pic_list)</span><br><span class="line">        tmp_data.append(n[<span class="string">'name'</span>])</span><br><span class="line">        tmp_data.append(pic_url)</span><br><span class="line">        tmp_data.append(n[<span class="string">'nvshen_id'</span>])</span><br><span class="line">        data.append(tmp_data)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, data=data, score=socre)</span><br></pre></td></tr></table></figure></p>
+<p>然后再写一个获取数据的接口，参数就是 page
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/api/getdata/&lt;int:page&gt;', methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(page)</span>:</span></span><br><span class="line">    db = get_db()</span><br><span class="line">    cur = db.execute(<span class="string">'select name, nvshen_id from nvshen order by id desc'</span>)</span><br><span class="line">    nvshen = [dict(name=row[<span class="number">0</span>], nvshen_id=row[<span class="number">1</span>]) <span class="keyword">for</span> row <span class="keyword">in</span> cur.fetchall()]</span><br><span class="line">    seg = <span class="number">0</span></span><br><span class="line">    seg_page = int(len(nvshen)/<span class="number">4</span>)</span><br><span class="line">    end = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> page == <span class="number">2</span>:</span><br><span class="line">        seg = seg_page</span><br><span class="line">        seg_page = seg*<span class="number">2</span></span><br><span class="line">    <span class="keyword">elif</span> page == <span class="number">3</span>:</span><br><span class="line">        seg = seg_page*<span class="number">2</span></span><br><span class="line">        seg_page = seg*<span class="number">3</span></span><br><span class="line">    <span class="keyword">elif</span> page == <span class="number">4</span>:</span><br><span class="line">        seg = seg_page*<span class="number">3</span></span><br><span class="line">        seg_page = int(len(nvshen)) + <span class="number">1</span></span><br><span class="line">        end = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">elif</span> page == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">"msg"</span>: <span class="string">"error page id"</span>, <span class="string">"code"</span>: <span class="number">422</span>&#125;), <span class="number">422</span></span><br><span class="line">    data = []</span><br><span class="line">    socre = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> nvshen[seg:seg_page]:</span><br><span class="line">        tmp_data = []</span><br><span class="line">        pic = db.execute(<span class="string">'select pic_url from picture where nvshen_id = (?)'</span>, [n[<span class="string">'nvshen_id'</span>]])</span><br><span class="line">        pic_list = [row[<span class="number">0</span>] <span class="keyword">for</span> row <span class="keyword">in</span> pic.fetchall()]</span><br><span class="line">        pic_url = random.choice(pic_list)</span><br><span class="line">        tmp_data.append(n[<span class="string">'name'</span>])</span><br><span class="line">        tmp_data.append(pic_url)</span><br><span class="line">        tmp_data.append(n[<span class="string">'nvshen_id'</span>])</span><br><span class="line">        data.append(tmp_data)</span><br><span class="line">    print(<span class="string">"getdata: "</span>, data)</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">"msg"</span>: data, <span class="string">"code"</span>: <span class="number">200</span>, <span class="string">"end"</span>: end&#125;), <span class="number">200</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>因为当前只是把数据分成4分，所以当 page 为4的时候，就把停止信号 end 设置为 True，这样前端判断这个信号就可以判断什么时候停止请求数据了。</p>
+</blockquote>
+<h2>改造前端</h2>
+<p>先写一个用户获取数据的函数
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">page</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">			xhr.responseType = <span class="string">"json"</span>;</span><br><span class="line">			xhr.open(<span class="string">'POST'</span>, <span class="string">'/api/getdata/'</span> + page, <span class="literal">true</span>);</span><br><span class="line">			xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">			xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(<span class="keyword">this</span>.status === <span class="number">200</span>) &#123;</span><br><span class="line">					<span class="comment">//console.log(this.response);</span></span><br><span class="line">					<span class="keyword">if</span>(<span class="keyword">this</span>.response[<span class="string">'end'</span>] === <span class="literal">true</span>) &#123;</span><br><span class="line">						<span class="comment">//console.log("end is true");</span></span><br><span class="line">						flag = <span class="literal">false</span>;</span><br><span class="line">					&#125;;</span><br><span class="line">						<span class="keyword">var</span> mydata = <span class="keyword">this</span>.response[<span class="string">'msg'</span>];</span><br><span class="line">						<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>, len=mydata.length; i&lt;len; i++)&#123;</span><br><span class="line">							<span class="keyword">var</span> myurl = mydata[i][<span class="number">1</span>];</span><br><span class="line">							<span class="keyword">var</span> myid = mydata[i][<span class="number">2</span>];</span><br><span class="line">							<span class="keyword">var</span> myname = mydata[i][<span class="number">0</span>];</span><br><span class="line">							<span class="keyword">var</span> htmlText = <span class="string">'&lt;article class="white-panel"&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;img data-src='</span> + myurl +<span class="string">' class="thumb"&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;h1&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href=URL title="去投票" target="_blank"&gt;'</span>.replace(<span class="string">"URL"</span>, Flask.url_for(<span class="string">"nvshen"</span>, &#123;<span class="attr">id</span>: myid&#125;)) +</span><br><span class="line">								 myname + <span class="string">'&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;/h1&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;p&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;div id="starBg" class="stars-bg"&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% if score == 1 %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 20%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% elif score == 2 %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 40%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% elif score == 3 %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 60%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% elif score == 4 %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 80%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% elif score == 5 %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 100%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% else %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;a href="#" class="star-active" style="width: 0%"&gt;&lt;/a&gt;'</span> +</span><br><span class="line">								<span class="string">'&#123;% endif %&#125;'</span> +</span><br><span class="line">								<span class="string">'&lt;/div&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;/p&gt;'</span> +</span><br><span class="line">								<span class="string">'&lt;/article&gt;'</span>;</span><br><span class="line">							<span class="keyword">var</span> script = <span class="string">'&lt;script&gt;'</span> +</span><br><span class="line">									<span class="string">'$(function()&#123;'</span> +</span><br><span class="line">									<span class="string">'$("img.thumb").lazyload();'</span> +</span><br><span class="line">									<span class="string">'&#125;)'</span> +</span><br><span class="line">									<span class="string">'&lt;\/script&gt;'</span>;</span><br><span class="line">							$(<span class="string">'#gallery-wrapper'</span>).append(htmlText);</span><br><span class="line">							$(<span class="string">'body'</span>).append(script);</span><br><span class="line">						&#125;</span><br><span class="line">					<span class="comment">//console.log("add new html finish");</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;;</span><br><span class="line">			xhr.send();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>主要还是拼接字符串，然后把获取到的数据塞进字符串中。</p>
+</blockquote>
+<p><strong>flask_jsglue</strong></p>
+<p>这里不得不提一下 flask 的一个插件 --flask_jsglue
+对于在 JavaScript 中使用 url_for 函数真的是太好用了，感兴趣的同学可以自行去看看，非常的简单好用。</p>
+<p>然后就是下拉的逻辑了
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">      <span class="keyword">var</span> totalHeight = $(<span class="built_in">document</span>).height(); <span class="comment">//整个文档高度</span></span><br><span class="line"><span class="keyword">var</span> scrollTop = $(<span class="built_in">window</span>).scrollTop();<span class="comment">//浏览器可视窗口顶端距离网页顶端的高度（垂直偏移）</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line">$(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	scrollTop = $(<span class="built_in">window</span>).scrollTop();</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"totalHeight-scrollTop-$(this).height()"</span>, totalHeight-scrollTop-$(<span class="keyword">this</span>).height());</span><br><span class="line">	totalHeight = $(<span class="built_in">document</span>).height();</span><br><span class="line">	<span class="keyword">if</span>(flag)&#123;</span><br><span class="line">		<span class="keyword">if</span>(totalHeight-scrollTop-$(<span class="keyword">this</span>).height()&lt;<span class="number">0.5</span>)&#123;</span><br><span class="line">			<span class="comment">//console.log("add new html");</span></span><br><span class="line">			getData(p);</span><br><span class="line">			p ++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>因为我们再进入首页的时候，已经返回了数据的第一部分，所以这里的 page 就从2开始取值；然后当整个文档的高度减去垂直偏移量，再减去浏览器可是窗口的高度小于0.5时，则调用拉取数据的函数，并且 p 自加1.</p>
+</blockquote>
+<h1>图片懒加载</h1>
+<p>对于图片懒加载，就比较简单了，有现成的组件库可以使用。
+首先引入类库
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://rawgit.com/tuupola/jquery_lazyload/2.x/lazyload.js"</span> type=<span class="string">"text/javascript"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后修改 img 元素的图片地址属性
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"thumb"</span> data-src=<span class="string">"&#123;&#123; p[1] &#125;&#125;"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>我们一般会把图片地址赋值给 src，现在我们赋值给 data-src。</p>
+</blockquote>
+<p>最后，在页面全局写一个函数
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      	$(<span class="string">"img.thumb"</span>).lazyload();</span><br><span class="line">  	&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样，就能保证图片只要当页面滚动到它的位置时才加载了。</p>
+<p>最后再提供下网站地址，供大家参考
+https://nvshen.luobodazahui.top</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感觉本站内容不错，有收获?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Luobo Zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Luobo Zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flask/" rel="tag"># Flask</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/没有忍住，还是用Python爬了N多个女神/" rel="next" title="没有忍住，还是用Python爬了N多个女神">
+                <i class="fa fa-chevron-left"></i> 没有忍住，还是用Python爬了N多个女神
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/luobo4.png" alt="Luobo Zhou">
+            
+              <p class="site-author-name" itemprop="name">Luobo Zhou</p>
+              <p class="site-description motion-element" itemprop="description">点点滴滴，源于生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhouwei713" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">瀑布流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">下拉加载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">改造后台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">改造前端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">图片懒加载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luobo Zhou</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">8.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动
+
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!--<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VGuNXI2sPyxNYQ447Qp6YVj6-gzGzoHsz',
+        appKey: 'fd9xw4Mz4c6oDvXOonoLV6kN',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
