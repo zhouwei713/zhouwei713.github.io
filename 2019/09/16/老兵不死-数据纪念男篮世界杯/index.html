@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,数据分析,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="luobodazahui" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="男篮世界杯已经落下帷幕，相信看球的朋友们都已经过足了篮球瘾。有些许遗憾，也有世界霸主的失落，还有老兵不死的坚持，当然还有斗牛军团的登顶。 自杀式输给波兰，溃败式负于尼日利亚，从前一直代表亚洲征战奥运会的中国，可能就要缺席下一届了。当阿联老去，中国即将不再有任何一名球员具备世界篮球运动员的水平，没有一个！期待中国男篮的再次崛起吧！ 星光黯淡，小将领衔，教练席上的神奇老者也没能创造神奇，历史最">
+<meta name="keywords" content="Python,数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="老兵不死|数据纪念男篮世界杯">
+<meta property="og:url" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/index.html">
+<meta property="og:site_name" content="luobodazahui">
+<meta property="og:description" content="男篮世界杯已经落下帷幕，相信看球的朋友们都已经过足了篮球瘾。有些许遗憾，也有世界霸主的失落，还有老兵不死的坚持，当然还有斗牛军团的登顶。 自杀式输给波兰，溃败式负于尼日利亚，从前一直代表亚洲征战奥运会的中国，可能就要缺席下一届了。当阿联老去，中国即将不再有任何一名球员具备世界篮球运动员的水平，没有一个！期待中国男篮的再次崛起吧！ 星光黯淡，小将领衔，教练席上的神奇老者也没能创造神奇，历史最">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/9.jpg">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/1.gif">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/2.gif">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/3.gif">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/4.gif">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/5.gif">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/6.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/7.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/8.png">
+<meta property="og:updated_time" content="2019-09-16T08:57:55.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老兵不死|数据纪念男篮世界杯">
+<meta name="twitter:description" content="男篮世界杯已经落下帷幕，相信看球的朋友们都已经过足了篮球瘾。有些许遗憾，也有世界霸主的失落，还有老兵不死的坚持，当然还有斗牛军团的登顶。 自杀式输给波兰，溃败式负于尼日利亚，从前一直代表亚洲征战奥运会的中国，可能就要缺席下一届了。当阿联老去，中国即将不再有任何一名球员具备世界篮球运动员的水平，没有一个！期待中国男篮的再次崛起吧！ 星光黯淡，小将领衔，教练席上的神奇老者也没能创造神奇，历史最">
+<meta name="twitter:image" content="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/9.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/">
+
+
+
+
+
+  <title>老兵不死|数据纪念男篮世界杯 | luobodazahui</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2a4828ea69a362e8db242fda0876c28f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+	<a href="https://github.com/zhouwei713" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">luobodazahui</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">周萝卜的分享</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.luobodazahui.top/2019/09/16/老兵不死-数据纪念男篮世界杯/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luobo Zhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/luobo4.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luobodazahui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">老兵不死|数据纪念男篮世界杯</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T16:47:05+08:00">
+                2019-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/16/老兵不死-数据纪念男篮世界杯/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/16/老兵不死-数据纪念男篮世界杯/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>
+
+</p>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/9.jpg"></p>
+<p>男篮世界杯已经落下帷幕，相信看球的朋友们都已经过足了篮球瘾。有些许遗憾，也有世界霸主的失落，还有老兵不死的坚持，当然还有斗牛军团的登顶。
+自杀式输给波兰，溃败式负于尼日利亚，从前一直代表亚洲征战奥运会的中国，可能就要缺席下一届了。当阿联老去，中国即将不再有任何一名球员具备世界篮球运动员的水平，没有一个！期待中国男篮的再次崛起吧！
+星光黯淡，小将领衔，教练席上的神奇老者也没能创造神奇，历史最差战绩，我们都不知道该不该赋予这只美国男篮以“梦之队”的称号。也许在不久后的东京，他们会球星云集，卷土重来吧。
+什么是老兵，是接近40岁“高龄”的斗士，是场均准两双的无解，是令人啧啧称奇的坚持。钻石的最后，虽然没能如愿，但是谁又会在乎呢，你已经征服了整个世界！潘帕斯草原上的雄鹰，终将振翅高飞。
+一如足球领域一样，斗牛军团的篮球同样强大。不能不佩服和感慨，当加索尔和卢比奥内外联合，双剑合璧时，他们就是篮球界的霸主。</p>
+<p>下面我们就一起通过真实的数据，来细数本届男篮世界杯上的各项数据吧。</p>
+<p><a id="more"></a></p>
+<h1>数据从哪里来</h1>
+<h2>我不生产数据，只是数据的搬运工</h2>
+<p>下面分析的数据，都是抓取自新浪体育</p>
+<p><strong>数据抓取</strong></p>
+<p>在新浪体育网站上，有个世界杯专栏，在数据榜这个模块里，可以找个类似下面的链接</p>
+<blockquote>
+<p>https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=FieldGoalsAverage&amp;order=desc&amp;dpc=1</p>
+</blockquote>
+<p>该链接，只要修改 ordertype 字段，就可以获取到诸如球员得分，篮板球，助攻数等一些列数据，具体的过程就不说了，就是发请求，解析 json 的简单操作</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url_list = [</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=PointsAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=ReboundsAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=PlusMinusAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=StealsAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=AssistsAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=BlockedAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=TurnoversAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=PersonalFoulsAverage'</span>,</span><br><span class="line">    <span class="string">'https://events.sports.sina.com.cn/bps/peony/mersh/beitai/fiba/stats/playerdata_order?leagueid=433&amp;ordertype=FieldGoalsAverage'</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fire</span><span class="params">(url)</span>:</span></span><br><span class="line">    file_name = url.split(<span class="string">'='</span>)[<span class="number">2</span>]</span><br><span class="line">    res = requests.get(url).json()</span><br><span class="line">    data = res[<span class="string">'playerdata_order'</span>]</span><br><span class="line">    items = map(get_data, data)</span><br><span class="line">    print(<span class="string">'save data'</span>)</span><br><span class="line">    save_to_csv(items, file_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(data)</span>:</span></span><br><span class="line">    name = data[<span class="string">'CNAlias'</span>]</span><br><span class="line">    country = data[<span class="string">'TeamCNName'</span>]</span><br><span class="line">    points = data[<span class="string">'PointsAverage'</span>]</span><br><span class="line">    rebounds = data[<span class="string">'ReboundsAverage'</span>]</span><br><span class="line">    steals = data[<span class="string">'StealsAverage'</span>]</span><br><span class="line">    assists = data[<span class="string">'AssistsAverage'</span>]</span><br><span class="line">    fouls = data[<span class="string">'PersonalFoulsAverage'</span>]</span><br><span class="line">    plus_minus = data[<span class="string">'PlusMinusAverage'</span>]</span><br><span class="line">    blocked = data[<span class="string">'BlockedAverage'</span>]</span><br><span class="line">    goals_percentage = data[<span class="string">'FieldGoalsPercentage_m'</span>]</span><br><span class="line">    turnovers = data[<span class="string">'TurnoversAverage'</span>]</span><br><span class="line">    result = &#123;</span><br><span class="line">        <span class="string">'name'</span>: name,</span><br><span class="line">        <span class="string">'country'</span>: country,</span><br><span class="line">        <span class="string">'points'</span>: points,</span><br><span class="line">        <span class="string">'rebounds'</span>: rebounds,</span><br><span class="line">        <span class="string">'steals'</span>: steals,</span><br><span class="line">        <span class="string">'assists'</span>: assists,</span><br><span class="line">        <span class="string">'fouls'</span>: fouls,</span><br><span class="line">        <span class="string">'plus_minus'</span>: plus_minus,</span><br><span class="line">        <span class="string">'blocked'</span>: blocked,</span><br><span class="line">        <span class="string">'goals_percentage'</span>: goals_percentage,</span><br><span class="line">        <span class="string">'turnovers'</span>: turnovers</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_to_csv</span><span class="params">(data, file_name)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(file_name + <span class="string">'_data.csv'</span>, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(<span class="string">'name,country,points,rebounds,steals,assists,fouls,plus_minus,blocked,goals_percentage,turnovers\n'</span>)</span><br><span class="line">        <span class="keyword">for</span> d <span class="keyword">in</span> data:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                row = <span class="string">'&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;,&#123;&#125;'</span>.format(d[<span class="string">'name'</span>],</span><br><span class="line">                                                                d[<span class="string">'country'</span>],</span><br><span class="line">                                                                d[<span class="string">'points'</span>],</span><br><span class="line">                                                                d[<span class="string">'rebounds'</span>],</span><br><span class="line">                                                                d[<span class="string">'steals'</span>],</span><br><span class="line">                                                                d[<span class="string">'assists'</span>],</span><br><span class="line">                                                                d[<span class="string">'fouls'</span>],</span><br><span class="line">                                                                d[<span class="string">'plus_minus'</span>],</span><br><span class="line">                                                                d[<span class="string">'blocked'</span>],</span><br><span class="line">                                                                d[<span class="string">'goals_percentage'</span>],</span><br><span class="line">                                                                d[<span class="string">'turnovers'</span>])</span><br><span class="line">                f.write(row)</span><br><span class="line">                f.write(<span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span><br><span class="line">        fire(url)</span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>数据保存</strong></p>
+<p>我分别抓取了以得分、篮板，助攻等排名的数据，并分别保存在不同的 csv 文件当中，最后的文件内容大致如下</p>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/1.gif"></p>
+<h1>全体球员可视化</h1>
+<h2>球员得分排名</h2>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/2.gif"></p>
+<p>几个亮点</p>
+<ul>
+<li>韩国的归化球员竟然场均得分最高</li>
+<li>阿联成功入选</li>
+<li>没有美国人</li>
+</ul>
+<p>可能是韩国队打的比赛不多，对手不是很强，这个罗建儿作为迷你型中锋，也可以在内线翻云覆雨。
+阿联确实宝刀不老，还记得最后的生死战，如果没有阿联，比赛可能早花了。
+再次印证本届美国男篮无大牌，没有绝对的进攻核心，可能是他们兵败中国的最大原因了。</p>
+<h2>球员篮板排名</h2>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/3.gif"></p>
+<p>有意思了，罗建儿竟然又是第一，要是按照国内排高校的标准，这妥妥的是双一流！</p>
+<h2>球员得分篮板排名</h2>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/4.gif"></p>
+<p>罗建儿是本届世界杯唯一的一个能拿到得分篮板两双的球员，且是20+10，能力还是毋庸置疑的！
+然后就要说说两位老将了，斯科拉和易建联。两位都是17+的场均得分加上7+的篮板，能够看得出，在攻防两端，两名球员都是各自球队不可或缺的一员。真的是家有一老，如有一宝啊。
+不过人家阿根廷男篮已经完成了新老交替，未来依旧可期。而中国男篮呢，未来靠谁，是亚洲第一后卫-郭艾伦，还是大魔王-周琦，都还缺乏领袖气质和绝对能力啊！</p>
+<h1>最佳阵容可视化分析</h1>
+<p>最佳阵容球员
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">the_best_lineup = [</span><br><span class="line">    <span class="string">'博格达诺维奇'</span>,</span><br><span class="line">    <span class="string">'富尼耶'</span>,</span><br><span class="line">    <span class="string">'卢比奥'</span>,</span><br><span class="line">    <span class="string">'斯科拉'</span>,</span><br><span class="line">    <span class="string">'加索尔'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h2>球员能力分析</h2>
+<p>接下来就来看看本届世界杯，最佳阵容成员的各自数据。能力强不强，数据不说谎。</p>
+<p>我分别选取了得分、篮板、助攻、抢断、封盖、犯规和失误为考察点，分别画出了各自的能力雷达图</p>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/5.gif"></p>
+<p>三个外线，两个内线，各自都以不同的能力，影响着比赛，帮助着团队。
+塞尔维亚的博格达诺维奇，得分能力比较强，场均助攻也不错，关键是助攻失误比非常低，妥妥的进攻发动机。
+法国队的富尼耶，得分助攻比较平均，从数据上来看，是五个人中较弱的一位。但是其强大的冲击力，是法国队得以击败美国的关键之一。
+西班牙的卢比奥，是五个人中助攻最高的一位，但是同时失误次数也最多。他在外线的威胁，是西班牙能够轻松击败阿根廷的重要因素。当年的金童已经蓄起了胡须，岁月的沧桑给了他更多的坚忍。
+阿根廷的斯科拉，作为攻守两端的绝对核心，如果不是两鬓的点点白发，不会有人知道他已经39岁了。此时的数据已经不再重要，篮球才是一切！
+西班牙的小加索尔，成功的从哥哥手中结果了国家队的大旗，不是十分华丽的数据的背后，是他在球场上的经验，老道和威慑力，有他在，西班牙就不会轻易被击败。</p>
+<h2>球员投篮命中率对比</h2>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/6.png"></p>
+<p>没想到，投篮命中率最高的竟然是一名外线球员，也许这样和当今篮球的发展相关，大个往外跑，小个向里冲！
+最佳五人组，每个人的命中率都在40%以上，怎一个稳字了得。</p>
+<h2>球员正负值对比</h2>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/7.png"></p>
+<p>富尼耶是五个人中正负值最低的，我说他在五个人里最弱，是不是也从侧面得到了印证呢。
+而加索尔的正负值是最高的，他就是球队的定海神针。犹记得当阿根廷反攻凶猛时，就是加索尔临危上场，稳定军心，遏制对手的进攻，成功帮助球队拿下比赛。</p>
+<h3>老兵不死</h3>
+<h2>只是逐渐凋零</h2>
+<p>来看看阿联的数据，竟然是莫名的心酸</p>
+<p><img src="/2019/09/16/老兵不死-数据纪念男篮世界杯/8.png"></p>
+<p>我不想再去分析为啥他的正负值这么低，因为我们都看到了他在球场上的努力和汗水，还有他因为丢失到手的篮板而懊恼的双手砸地的场景。</p>
+<p>还有斯科拉，12.9的正负值，43.4%的命中率，场均17.9分，8.1篮板，没有人能够要求他再多做些什么了，尽情释放，努力燃烧，不悔！</p>
+<p>最后以天下足球的文案来结尾，再合适不过了。</p>
+<blockquote>
+<p>岁月你别催，该来的我不推；岁月你别催，走远的仍要追。当不得不说再见的时候，挥别的那一刻就如同流水的光阴，谁能抵得过，谁能叹息、奈何。</p>
+</blockquote>
+<p>公众号后台回复“老兵不死”，获取完整代码。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感觉本站内容不错，有收获?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Luobo Zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Luobo Zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/11/Python-分析天气，告诉你中秋应该去哪里/" rel="next" title="Python 分析天气，告诉你中秋应该去哪里">
+                <i class="fa fa-chevron-left"></i> Python 分析天气，告诉你中秋应该去哪里
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/luobo4.png" alt="Luobo Zhou">
+            
+              <p class="site-author-name" itemprop="name">Luobo Zhou</p>
+              <p class="site-description motion-element" itemprop="description">点点滴滴，源于生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhouwei713" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">数据从哪里来</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">我不生产数据，只是数据的搬运工</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">全体球员可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">球员得分排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">球员篮板排名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">球员得分篮板排名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">最佳阵容可视化分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">球员能力分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">球员投篮命中率对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">球员正负值对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.1.</span> <span class="nav-text">老兵不死</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">只是逐渐凋零</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luobo Zhou</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">17.3k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动
+
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!--<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VGuNXI2sPyxNYQ447Qp6YVj6-gzGzoHsz',
+        appKey: 'fd9xw4Mz4c6oDvXOonoLV6kN',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
