@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.luobodazahui.top/"/>
-  <updated>2019-09-27T06:38:12.804Z</updated>
+  <updated>2019-10-09T05:44:39.320Z</updated>
   <id>https://blog.luobodazahui.top/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python 带你分析，英超是否已经大结局</title>
+    <link href="https://blog.luobodazahui.top/2019/10/09/Python-%E5%B8%A6%E4%BD%A0%E5%88%86%E6%9E%90%EF%BC%8C%E8%8B%B1%E8%B6%85%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E5%A4%A7%E7%BB%93%E5%B1%80/"/>
+    <id>https://blog.luobodazahui.top/2019/10/09/Python-带你分析，英超是否已经大结局/</id>
+    <published>2019-10-09T05:40:09.000Z</published>
+    <updated>2019-10-09T05:44:39.320Z</updated>
+    
+    <content type="html"><![CDATA[<p></p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/fengmian.jpg"></p><h1>引子</h1><p>随着本轮英超战罢，领头羊利物浦已经领先第二名曼城8分之多，新赛季的8连胜，不仅彰显着红军将士誓夺英超首冠的决心，也似乎在提醒着英超诸强，利物浦的复兴已然来临。</p><p>而曼城意外的输给狼队，不仅被拉大了和榜首的差距，也被身后的娜娜迎头赶上，看来英超亚军之争也是分外激烈。</p><p>不过足球本身就是一项偶然性很强的运动，在足球场上，分分秒秒都可能发生意想不到的事情，何况是漫长的一整个赛季。今天我们就从数据上出发，通过分析英超各个球队的数据，来看看哪些球队更具有冠军相，英超五强，谁人称雄。</p><p><a id="more"></a></p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/fengmian2.jpg"></p><h1>抓取数据</h1><p>我这里选择的是“懂球帝”网站上提供的数据</p><blockquote><p>https://www.dongqiudi.com/data?competition=8</p></blockquote><p>首先可以在数据页面拿到英超各个球队的战绩，进球数和净胜球等信息</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/1.png"></p><blockquote><p>https://www.dongqiudi.com/team/50000516.html</p></blockquote><p>之后就是在每个球队的主页上，抓取球队所有球员的信息</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/2.png"></p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/3.png"></p><p>下面给出部分抓取代码</p><p>抓取球队信息<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_team_data</span><span class="params">()</span>:</span></span><br><span class="line">    qiudui_url = <span class="string">'https://www.dongqiudi.com/data?competition=8'</span></span><br><span class="line">    qiudui_res = requests.get(qiudui_url, headers=header, cookies=session).text</span><br><span class="line">    content = BeautifulSoup(qiudui_res, <span class="string">'html.parser'</span>)</span><br><span class="line">    team_content = content.find(<span class="string">'table'</span>).find_all(<span class="string">'tr'</span>)</span><br><span class="line">    team_list = list(map(deal_element_list, team_content[<span class="number">2</span>:]))</span><br><span class="line">    save_to_csv(team_list)</span><br><span class="line">    print(<span class="string">'get player data now...'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> team_list:</span><br><span class="line">        print(<span class="string">"爬取url："</span>, i[<span class="number">0</span>])</span><br><span class="line">        get_players_urls(i[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></p><p>对于球员信息，这里使用 selenium 来模拟浏览网页<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_players_urls</span><span class="params">(u)</span>:</span></span><br><span class="line">    Chrome_driver = webdriver.Chrome(options=options)</span><br><span class="line">    u = u</span><br><span class="line">    Chrome_driver.get(u)</span><br><span class="line">    ele_div = Chrome_driver.find_element_by_xpath(<span class="string">'//*[@id="__layout"]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]'</span>)</span><br><span class="line">    ele_p = ele_div.find_elements_by_tag_name(<span class="string">'p'</span>)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p><p>最后，我们可以得到两个数据文件，分别是 yingchao_data.csv 和 player_data.csv。</p><h1>分析数据</h1><h2>1. 英超球队进球数据</h2><p>首先先来看看各支球队在进球方面的数据，我选取了球队的进球和净胜球的数据</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/4.gif"></p><p>可以看出基本上排在前列的球队无论是进球数量还是净胜球数量，都是比较高的，其中曼城和利物浦更是独一档的存在，绝对的英超巨无霸。</p><p>而排在下游的球队，净胜球就惨不忍睹了，副班长伍德福德8轮联赛下来，进4球失20球的成绩还是太扎眼，保级之路漫漫，劝君珍惜英超时啊。</p><h2>2. 球队球员综合得分</h2><p>接下来再来看看每个球队球员的综合得分情况，也许球员的综合得分也能够从侧面反应出每支球队的整体战斗力吧</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/5.png"></p><p>从球员的综合得分来看，曼城还是高居榜首，热刺和利物浦紧随其后。</p><p>看来曼城无论从攻击力还是球员的综合实力来看，都是高居英超榜首的，但是现在竟然落后8分之多，是利物浦太过强势还是曼城自身出现了问题呢？</p><p>而目前排名中游的曼联，在这个榜单中的排位也不是很低，可以说曼联球员的能力还是有的，就是不知道怎么，在老爵爷隐退之后，曼联就不再是曾经的红魔了。</p><h2>3. 各队前锋数据</h2><p>下面我选择了各队前锋球员中的射术、速度和力量来作为分析数据，看看每支球队的前锋们，都是怎样的水平</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/6.png"></p><p>曼城还是第一，他的锋线由阿奎罗、斯特拉，热苏斯等人组成，有冲击力，有速度，有技术，妥妥的英超第一锋线。</p><p>而由萨拉赫领衔的利物浦则排在第4位，感觉本赛季萨拉赫的状态有所下降，不过马内倒是依旧强势，不管怎么说，利物浦的锋线三叉戟依旧稳定恐怖。</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/7.png"></p><p>还可以从上面的散点图中看出，阿森纳的前锋们，在速度方面是英超里最突出的，毕竟有奥巴梅扬的加持；而在射术方面，则是曼城最好，阿奎罗作为球王的女婿，也不是盖的；而在力量方面，应该是维拉队更加强悍一些，毕竟对于中下游球队来说，冲击力可是立身之本呢。</p><h2>4. 各队中场数据</h2><p>对于中场球员，我选择了传球、速度和盘带三项指标作为分析数据</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/8.png"></p><p>曼城仍然占据首位，毕竟是由德布劳内和席尔瓦组成的中场啊，无论是控制力还是向前的传递能力，都是世界顶级的。而他们两人还同时处在助攻榜的前两位，想想曼城的前锋们真是幸福啊</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/9.png"></p><h2>5. 各队后卫数据</h2><p>对于后防线上的球员，我选取了传球、防守和力量作为评判指标</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/10.png"></p><p>曼城利物浦再次占据前两位，看来防守赢得胜利，不仅仅适用于 NBA，在足球场上也是同样适用啊。</p><p>而在这两份榜单中，都不见了阿森纳的身影，没有强大的中场，又没有稳固的后防，虽然现在位居积分榜的第三位，但是本赛季娜娜的联赛还是不好踢啊，祝好吧！</p><h2>6. 英超五强数据</h2><p>最后我们来看看英超五强的数据对比</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/11.gif"></p><p>可以看到，曼城还是在各个方面都要强于其他四支球队，而利物浦也不遑多让，毕竟联赛八连胜就是最好的佐证。</p><p>对于阿森纳来说，可能保住前四的位置，再次杀入欧冠才是更为实际的目标了。而对于切尔西呢，当前的表现只能是中规中矩，期待它未来的爆发。至于曼联，只求尽快回到赢球的轨迹上来！</p><p>不过联赛才刚刚开始，毕竟在漫长的联赛当中，要想赢得冠军，就要比拼阵容、板凳、任性，稳定性等待诸多因素。一切都还未定，无论是整体实力超强的蓝月亮后来居上，还是众志成城的红军一骑绝尘，这都是一个值得期待的盛世英超！</p><p><img src="/2019/10/09/Python-带你分析，英超是否已经大结局/yingchao.jpg"></p><p>好了，今天的分享就到这里了，公众号后台回复“英超”，可以获取完整代码哦！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;
+
+&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/10/09/Python-带你分析，英超是否已经大结局/fengmian.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1&gt;引子&lt;/h1&gt;
+&lt;p&gt;随着本轮英超战罢，领头羊利物浦已经领先第二名曼城8分之多，新赛季的8连胜，不仅彰显着红军将士誓夺英超首冠的决心，也似乎在提醒着英超诸强，利物浦的复兴已然来临。&lt;/p&gt;
+&lt;p&gt;而曼城意外的输给狼队，不仅被拉大了和榜首的差距，也被身后的娜娜迎头赶上，看来英超亚军之争也是分外激烈。&lt;/p&gt;
+&lt;p&gt;不过足球本身就是一项偶然性很强的运动，在足球场上，分分秒秒都可能发生意想不到的事情，何况是漫长的一整个赛季。今天我们就从数据上出发，通过分析英超各个球队的数据，来看看哪些球队更具有冠军相，英超五强，谁人称雄。&lt;/p&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="https://blog.luobodazahui.top/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://blog.luobodazahui.top/tags/Python/"/>
+    
+      <category term="数据分析" scheme="https://blog.luobodazahui.top/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>2019 年排名前6的数据分析工具</title>
