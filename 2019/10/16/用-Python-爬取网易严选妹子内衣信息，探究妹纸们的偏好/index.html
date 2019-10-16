@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,数据分析,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="luobodazahui" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="今天继续来分析爬虫数据分析文章，一起来看看网易严选商品评论的获取和分析。  警告：本教程仅用作学习交流，请勿用作商业盈利，违者后果自负！如本文有侵犯任何组织集团公司的隐私或利益，请告知联系萝卜删除！！！ 声明：这是一篇超级严肃的技术文，超！级！严！肃！请本着学习交流的态度阅读，谢谢！">
+<meta name="keywords" content="Python,数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Python 爬取网易严选妹子内衣信息，探究妹纸们的偏好">
+<meta property="og:url" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/index.html">
+<meta property="og:site_name" content="luobodazahui">
+<meta property="og:description" content="今天继续来分析爬虫数据分析文章，一起来看看网易严选商品评论的获取和分析。  警告：本教程仅用作学习交流，请勿用作商业盈利，违者后果自负！如本文有侵犯任何组织集团公司的隐私或利益，请告知联系萝卜删除！！！ 声明：这是一篇超级严肃的技术文，超！级！严！肃！请本着学习交流的态度阅读，谢谢！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/fengmian.jpg">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/shouzhang.jpg">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/1.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/2.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/3.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/4.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/5.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/6.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/7.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/8.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/9.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/10.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/chima.jpg">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/11.png">
+<meta property="og:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/data_wc.png">
+<meta property="og:updated_time" content="2019-10-16T03:37:24.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Python 爬取网易严选妹子内衣信息，探究妹纸们的偏好">
+<meta name="twitter:description" content="今天继续来分析爬虫数据分析文章，一起来看看网易严选商品评论的获取和分析。  警告：本教程仅用作学习交流，请勿用作商业盈利，违者后果自负！如本文有侵犯任何组织集团公司的隐私或利益，请告知联系萝卜删除！！！ 声明：这是一篇超级严肃的技术文，超！级！严！肃！请本着学习交流的态度阅读，谢谢！">
+<meta name="twitter:image" content="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/fengmian.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/">
+
+
+
+
+
+  <title>用 Python 爬取网易严选妹子内衣信息，探究妹纸们的偏好 | luobodazahui</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2a4828ea69a362e8db242fda0876c28f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    
+	<a href="https://github.com/zhouwei713" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">luobodazahui</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">周萝卜的分享</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.luobodazahui.top/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luobo Zhou">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/luobo4.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="luobodazahui">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用 Python 爬取网易严选妹子内衣信息，探究妹纸们的偏好</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T11:32:51+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>
+
+</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/fengmian.jpg"></p>
+<p>今天继续来分析爬虫数据分析文章，一起来看看网易严选商品评论的获取和分析。</p>
+<blockquote>
+<p>警告：本教程仅用作学习交流，请勿用作商业盈利，违者后果自负！如本文有侵犯任何组织集团公司的隐私或利益，请告知联系萝卜删除！！！
+声明：这是一篇超级严肃的技术文，超！级！严！肃！请本着学习交流的态度阅读，谢谢！</p>
+</blockquote>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/shouzhang.jpg"></p>
+<p><a id="more"></a></p>
+<h1>网易商品评论爬取</h1>
+<h2>分析网页</h2>
+<h3>评论分析</h3>
+<p>进入到网易精选官网，搜索“文胸”后，先随便点进一个商品。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/1.png"></p>
+<p>在商品页面，打开 Chrome 的控制台，切换至 Network 页，再把商品页面切换到评价标签下，选择一个评论文字，如“薄款、穿着舒适、满意”，在 Network 中搜索。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/2.png"></p>
+<p>可以发现，评论文字是通过 listByItemByTag.json 传递过来的，点击进入该请求，并拷贝出该请求的 URL：</p>
+<blockquote>
+<p>https://you.163.com/xhr/comment/listByItemByTag.json?csrf_token=060f4782bf9fda38128cfaeafb661f8c&amp;__timestamp=1571106038283&amp;itemId=1616018&amp;tag=%E5%85%A8%E9%83%A8&amp;size=20&amp;page=1&amp;orderBy=0&amp;oldItemTag=%E5%85%A8%E9%83%A8&amp;oldItemOrderBy=0&amp;tagChanged=0</p>
+</blockquote>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/3.png"></p>
+<p>将该 URL 放入 Postman 中，逐个尝试 url query params，最后能够发现，只需保留 itemId 和 page 两个请求参数即可。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/4.png"></p>
+<p>请求返回的是一个 JSON 格式的数据，下面就是分析该 JSON 数据了。</p>
+<p>不难发现，所有的评论数据都存储在 commentList 中，我们只需保存该数据即可。</p>
+<p>下面就是如何获取 itemId 的信息了，这个是产品的 ID，我们回到网易精选首页，继续分析。</p>
+<h3>产品 ID 获取</h3>
+<p>当我们在搜索框中输入关键字进行搜索的时候，同样能够发现在 Network 中有很多请求，此时可以观察各个请求，通过请求文件的名称（此处需要一些经验，守规矩的程序员都不会乱起名字），我们可以定位到搜索时展示搜索结果的请求。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/5.png"></p>
+<p>搜索一般都是 search，所以我们就锁定了这个 search.json 的请求。同样把请求 URL 拷贝到 Postman 中，逐个验证传参，最后保留 page 和 keyword 两个参数即可。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/6.png"></p>
+<p>该请求返回的数据较多，还是需要耐心的分析数据，也能够发现，在 result-&gt;data-&gt;directly-&gt;searcherResult-&gt;result 下面的 id 值，即为我们要获取的产品 ID。</p>
+<p>以上，我们基本完成了前期的分析工作，下面开始代码的编写。</p>
+<h2>编写代码</h2>
+<h3>获取产品 ID</h3>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def search_keyword(keyword):</span><br><span class="line">    uri = &apos;https://you.163.com/xhr/search/search.json&apos;</span><br><span class="line">    query = &#123;</span><br><span class="line">        &quot;keyword&quot;: keyword,</span><br><span class="line">        &quot;page&quot;: 1</span><br><span class="line">    &#125;</span><br><span class="line">    try:</span><br><span class="line">        res = requests.get(uri, params=query).json()</span><br><span class="line">        result = res[&apos;data&apos;][&apos;directly&apos;][&apos;searcherResult&apos;][&apos;result&apos;]</span><br><span class="line">        product_id = []</span><br><span class="line">        for r in result:</span><br><span class="line">            product_id.append(r[&apos;id&apos;])</span><br><span class="line">        return product_id</span><br><span class="line">    except:</span><br><span class="line">        raise</span><br></pre></td></tr></table></figure></p>
+<p>我这里是获取了 page 为 1 的产品 ID，下面就是通过产品 ID 来获取不同产品下的评论信息。</p>
+<p>通过前面的分析，我们可以知道，评论信息都是如下形式的，对这种形式的信息，我们可以很方便地存储进入 MongoDB，然后再慢慢分析数据里的内容。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">                &quot;skuInfo&quot;: [</span><br><span class="line">                    &quot;颜色:肤色&quot;,</span><br><span class="line">                    &quot;杯码:75B&quot;</span><br><span class="line">                ],</span><br><span class="line">                &quot;frontUserName&quot;: &quot;1****8&quot;,</span><br><span class="line">                &quot;frontUserAvatar&quot;: &quot;https://yanxuan.nosdn.127.net/f8f20a77db47b8c66c531c14c8b38ee7.jpg&quot;,</span><br><span class="line">                &quot;content&quot;: &quot;质量好，穿着舒服&quot;,</span><br><span class="line">                &quot;createTime&quot;: 1555546727635,</span><br><span class="line">                &quot;picList&quot;: [</span><br><span class="line">                    &quot;https://yanxuan.nosdn.127.net/742f28186d805571e4b3f28faa412941.jpg&quot;</span><br><span class="line">                ],</span><br><span class="line">                &quot;commentReplyVO&quot;: null,</span><br><span class="line">                &quot;memberLevel&quot;: 4,</span><br><span class="line">                &quot;appendCommentVO&quot;: null,</span><br><span class="line">                &quot;star&quot;: 5,</span><br><span class="line">                &quot;itemId&quot;: 1680205</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于 MongoDB，我们既可以自己搭建，也可以使用网上免费的服务。在这里我介绍一个免费的 MongoDB 服务网站：<a href="https://mlab.com/home" target="_blank" rel="noopener">mlab</a>，使用很简单，就不过多介绍使用过程了。</p>
+<p>数据库有了，下面就是把数据保存进去了。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def details(product_id):</span><br><span class="line">    url = &apos;https://you.163.com/xhr/comment/listByItemByTag.json&apos;</span><br><span class="line">    try:</span><br><span class="line">        C_list = []</span><br><span class="line">        for i in range(1, 100):</span><br><span class="line">            query = &#123;</span><br><span class="line">                &quot;itemId&quot;: product_id,</span><br><span class="line">                &quot;page&quot;: i,</span><br><span class="line">            &#125;</span><br><span class="line">            res = requests.get(url, params=query).json()</span><br><span class="line">            if not res[&apos;data&apos;][&apos;commentList&apos;]:</span><br><span class="line">                break</span><br><span class="line">            print(&quot;爬取第 %s 页评论&quot; % i)</span><br><span class="line">            commentList = res[&apos;data&apos;][&apos;commentList&apos;]</span><br><span class="line">            C_list.append(commentList)</span><br><span class="line">            time.sleep(1)</span><br><span class="line">            # save to mongoDB</span><br><span class="line">            try:</span><br><span class="line">                mongo_collection.insert_many(commentList)</span><br><span class="line">            except:</span><br><span class="line">                continue</span><br><span class="line">        return C_list</span><br><span class="line">    except:</span><br><span class="line">        raise</span><br></pre></td></tr></table></figure></p>
+<p>最后爬取完成之后，总共是七千多条数据，下面就可以根据个人需要做一些分析了。</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/7.png"></p>
+<p>爬取的数据 MongoDB 链接</p>
+<blockquote>
+<p>conn = MongoClient(&quot;mongodb://%s:%s@ds149974.mlab.com:49974/you163&quot; % ('you163', 'you163'))
+db = conn.you163
+mongo_collection = db.you163</p>
+</blockquote>
+<h1>商品评论数据分析</h1>
+<p>下面就到了激动人心的时刻了，一探妹子偏好！</p>
+<h2>偏好颜色</h2>
+<p>先来看看妹子们偏好的颜色</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/8.png"></p>
+<p>可以看出，黑色是遥遥领先的哦，这里你要做到心中有数！</p>
+<p>再通过饼状图来观察下不同颜色的占比情况</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/9.png"></p>
+<p>那么这些颜色中，有你的她喜欢的吗？</p>
+<h2>尺寸分布</h2>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/10.png"></p>
+<p>没有问题，75B 就是大多数妹子的尺寸了</p>
+<p>如果你对这种罩杯尺寸没有研究的话，不要紧，贴心的我给你准备了对照表，拿走不谢</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/chima.jpg"></p>
+<h2>商品评论</h2>
+<p>最后我们再来看看妹子们对于商品的评价情况</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/11.png"></p>
+<p>就星级评价上来看，大多数都是五星好评，毕竟打着“严选”的名号，质量是必须有保证的。</p>
+<p>再来看看在评论区，妹子最喜欢用什么词语来描述呢</p>
+<p><img src="/2019/10/16/用-Python-爬取网易严选妹子内衣信息，探究妹纸们的偏好/data_wc.png"></p>
+<p>舒服、很舒服，非常舒服；满意、很满意，非常满意。</p>
+<p>仿佛进入了“夸夸群”，看来妹子们首要看重的就是舒服与否，毕竟是贴身的，质量最重要！</p>
+<p>好了，看了上面的分析，单身的你是不是更加有了脱单的冲动？如果是已经有软妹傍身的你，是不是该下手讨好下身边的她了呢？</p>
+<p>完整代码</p>
+<blockquote>
+<p>https://github.com/zhouwei713/data_analysis/tree/master/you163_spider</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感觉本站内容不错，有收获?</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Luobo Zhou 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Luobo Zhou 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/12/爬-Boss-直聘，分析-Python-工作现状/" rel="next" title="爬 Boss 直聘，分析 Python 工作现状">
+                <i class="fa fa-chevron-left"></i> 爬 Boss 直聘，分析 Python 工作现状
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/luobo4.png" alt="Luobo Zhou">
+            
+              <p class="site-author-name" itemprop="name">Luobo Zhou</p>
+              <p class="site-description motion-element" itemprop="description">点点滴滴，源于生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/zhouwei713" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">网易商品评论爬取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">分析网页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">评论分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">产品 ID 获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">编写代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">获取产品 ID</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">商品评论数据分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">偏好颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">尺寸分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">商品评论</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luobo Zhou</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">26.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动
+
+</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!--<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'VGuNXI2sPyxNYQ447Qp6YVj6-gzGzoHsz',
+        appKey: 'fd9xw4Mz4c6oDvXOonoLV6kN',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
